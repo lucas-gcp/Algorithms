@@ -32,5 +32,6 @@ void astack_push(int value, astack* stack) {
 int astack_pop(astack* stack) {
     if (stack->n != 0)
         return stack->stack[--stack->n];
+    astack_destroy(stack);
     exit(1);
 }

@@ -8,12 +8,13 @@ struct lqueue {
 };
 
 lqueue* lqueue_create() {
-    lqueue *queue = malloc(sizeof(queue));
+    lqueue* queue = malloc(sizeof(lqueue));
     queue->s = queue->e = NULL;
+    return queue;
 }
 
 void lqueue_destroy(lqueue* queue) {
-    llsit_destroy(queue->s);
+    llist_destroy(queue->s);
     free(queue);
 }
 
@@ -23,11 +24,23 @@ void lqueue_clear(lqueue* queue) {
 }
 
 void lqueue_enqueue(int value, lqueue* queue) {
-    queue->e = llist_insert(value, queue->e);
+    llist new = llist_create();
+    new = llist_insert(value, new);
+    if (queue->s != NULL)
+        llist_setnext(queue->s, new);
+    else
+        queue->s = new;
+    queue->e = new;
 }
 
 int lqueue_dequeue(lqueue* queue) {
-    int value = llist_getvalue(queue->s);
-    queue->s = llist_removen(queue->s, queue->s);
-    return value;
+    if (queue->s != NULL) {
+        int value = llist_getvalue(queue->s);
+        queue->s = llist_removen(queue->s, queue->s);
+        if (queue->s == NULL)
+            queue->e = NULL;
+        return value;
+    }
+    lqueue_destroy(queue);
+    exit(1);
 }

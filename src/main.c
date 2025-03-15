@@ -1,27 +1,19 @@
-#include "llist.h"
-#include "dllist.h"
+#include "lqueue.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
-    dllist list = dllist_create();
+    lqueue *queue = lqueue_create();
 
-    int i;
-    for (i = 0; i < 5; i++)
-        list = dllist_insert(i, list);  
+    lqueue_enqueue(1, queue);
+    lqueue_enqueue(2, queue);
+    int val = lqueue_dequeue(queue);
+    printf("%d\n", val);
+    val = lqueue_dequeue(queue);
+    printf("%d\n", val);
+    lqueue_enqueue(3, queue);
+
+    lqueue_destroy(queue);
     
-    dllist_print(list);
-    
-    dllist second = dllist_next(list);
-
-    list = dllist_removen(second, list);
-
-    dllist_print(list);
-
-    list = dllist_sremove(4, list);
-
-    dllist_print(list);
-
-    dllist_destroy(list);
-
     return 0;
 }

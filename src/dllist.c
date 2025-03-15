@@ -62,12 +62,14 @@ dllist dllist_search(int value, dllist list) {
 dllist dllist_next(dllist list) {
     if (list != NULL)
         return list->next;
+    dllist_destroy(list);
     exit(1);
 }
 
 dllist dllist_prev(dllist list) {
     if (list != NULL)
         return list->prev;
+    dllist_destroy(list);
     exit(1);
 }
 

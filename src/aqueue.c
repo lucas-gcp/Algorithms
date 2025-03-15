@@ -42,5 +42,6 @@ int aqueue_dequeue(aqueue* queue) {
         queue->n--;
         return value;
     }
+    aqueue_destroy(queue);
     exit(1);
 }
