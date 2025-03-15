@@ -1,6 +1,6 @@
 typedef struct astack astack;
 
-astack* astack_create(int size);
+astack* astack_create(int max_size);
 
 void astack_destroy(astack* stack);
 
