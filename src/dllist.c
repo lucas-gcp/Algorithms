@@ -33,38 +33,48 @@ dllist dllist_insert(int value, dllist list) {
     return new;
 }
 
-void dllist_removen(dllist node) {
+dllist dllist_removen(dllist node, dllist list) {
     if (node->prev != NULL)
         node->prev->next = node->next;
+    else
+        list = node->next;
     if (node->next != NULL)
         node->next->prev = node->prev;
     free(node);
+
+    return list;
 }
 
-void dllist_sremove(int value, dllist list) {
+dllist dllist_sremove(int value, dllist list) {
     dllist node = dllist_search(value, list);
-    if (node != NULL) dllist_removen(node);
+    if (node != NULL) {
+        list = dllist_removen(node, list); }
+    return list;
 }
 
 dllist dllist_search(int value, dllist list) {
     while (list != NULL && list->data != value) {
         list = list->next;
     }
-    return NULL;
+    return list;
 }
 
 dllist dllist_next(dllist list) {
     if (list != NULL)
         return list->next;
+    exit(1);
 }
 
 dllist dllist_prev(dllist list) {
     if (list != NULL)
         return list->prev;
+    exit(1);
 }
 
 int dllist_getvalue(dllist node) {
-    if (node != NULL) return node->data;
+    if (node != NULL)
+        return node->data;
+    exit(1);
 }
 
 void dllist_print(dllist list) {

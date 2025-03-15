@@ -64,6 +64,7 @@ llist llist_next(llist list) {
 
 int llist_getvalue(llist node) {
     if (node != NULL) return node->data;
+    exit(1);
 }
 
 void llist_print(llist list) {

@@ -6,9 +6,9 @@ void dllist_destroy(dllist list);
 
 dllist dllist_insert(int value, dllist list);
 
-void dllist_removen(dllist node);
+dllist dllist_removen(dllist node, dllist list);
 
-void dllist_sremove(int value, dllist list);
+dllist dllist_sremove(int value, dllist list);
 
 dllist dllist_search(int value, dllist list);
 

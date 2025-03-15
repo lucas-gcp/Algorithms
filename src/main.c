@@ -12,11 +12,12 @@ int main() {
     dllist_print(list);
     
     dllist second = dllist_next(list);
-    dllist_removen(list);
+
+    list = dllist_removen(second, list);
 
     dllist_print(list);
 
-    dllist_sremove(4, list);
+    list = dllist_sremove(4, list);
 
     dllist_print(list);
 
