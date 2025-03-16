@@ -6,7 +6,9 @@ void llist_destroy(llist node);
 
 llist llist_insert(int value, llist list);
 
-llist llist_endinsert(int value, llist list);
+llist llist_insertnext(int value, llist list);
+
+llist llist_insertend(int value, llist list);
 
 llist llist_removen(llist node, llist list);
 
@@ -14,7 +16,7 @@ llist llist_sremove(int value, llist list);
 
 llist llist_next(llist list);
 
-llist llist_setnext(llist list, llist next);
+void llist_setnext(llist list, llist next);
 
 int llist_getvalue(llist node);
 

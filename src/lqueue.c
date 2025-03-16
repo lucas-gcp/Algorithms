@@ -27,7 +27,7 @@ void lqueue_enqueue(int value, lqueue* queue) {
     llist new = llist_create();
     new = llist_insert(value, new);
     if (queue->s != NULL)
-        llist_setnext(queue->s, new);
+        llist_setnext(queue->e, new);
     else
         queue->s = new;
     queue->e = new;

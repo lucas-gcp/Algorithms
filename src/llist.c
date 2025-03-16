@@ -27,7 +27,19 @@ llist llist_insert(int value, llist list) {
     return new;
 }
 
-llist llist_endinsert(int value, llist list) {
+llist llist_insertnext(int value, llist list) {
+    llist new = malloc(sizeof(*new));
+    new->data = value;
+    if (list != NULL) {
+        new->next = list->next;
+        list->next = new;
+    }
+    else
+        list = new;
+    return list;
+}
+
+llist llist_insertend(int value, llist list) {
     llist new = malloc(sizeof(*new));
     new->data = value;
     new->next = NULL;
@@ -39,6 +51,13 @@ llist llist_endinsert(int value, llist list) {
     } else
         list = new;
     return list;
+}
+
+void llist_setnext(llist node, llist next) {
+    if (node != NULL) {
+        next->next = node->next;
+        node->next = next;
+    }
 }
 
 llist llist_removen(llist node, llist list) {
@@ -75,14 +94,6 @@ llist llist_next(llist list) {
     if (list == NULL)
         return NULL;
     return list->next;
-}
-
-llist llist_setnext(llist list, llist next) {
-    if (list != NULL) {
-        next->next = list->next;
-        list->next = next;
-    }
-    return list;
 }
 
 int llist_getvalue(llist node) {
