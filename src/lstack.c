@@ -29,7 +29,7 @@ void lstack_push(int value, lstack* stack) {
 int lstack_pop(lstack* stack) {
     if (stack->beg != NULL) {
         int value = llist_getvalue(stack->beg);
-        stack->beg = llist_removen(stack->beg, stack->beg);
+        stack->beg = llist_removenode(stack->beg, stack->beg);
         return value;
     }
     lstack_destroy(stack);

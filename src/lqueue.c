@@ -36,7 +36,7 @@ void lqueue_enqueue(int value, lqueue* queue) {
 int lqueue_dequeue(lqueue* queue) {
     if (queue->s != NULL) {
         int value = llist_getvalue(queue->s);
-        queue->s = llist_removen(queue->s, queue->s);
+        queue->s = llist_removenode(queue->s, queue->s);
         if (queue->s == NULL)
             queue->e = NULL;
         return value;

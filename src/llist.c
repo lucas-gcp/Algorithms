@@ -60,7 +60,48 @@ void llist_setnext(llist node, llist next) {
     }
 }
 
-llist llist_removen(llist node, llist list) {
+llist llist_concat(llist l1, llist l2) {
+    if (l1 == NULL)
+        l1 = l2;
+    else {
+        llist temp;
+        for (temp = l1; temp->next != NULL; temp = temp->next);
+        temp->next = l2;
+    }
+    return l1;
+}
+
+llist llist_union(llist l1, llist l2) {
+    llist u = llist_create();
+
+    for (; l1 != NULL; l1 = l1->next)
+        if (llist_search(l1->data, u) == NULL)
+            u = llist_insert(l1->data, u);
+
+    for (; l2 != NULL; l2 = l2->next)
+        if (llist_search(l2->data, u) == NULL)
+            u = llist_insert(l2->data, u);
+
+    return u;
+}
+
+llist llist_intersection(llist l1, llist l2) {
+    llist u = llist_create();
+    for (; l1 != NULL; l1 = l1->next)
+        if (llist_search(l1->data, l2) != NULL && llist_search(l1->data, u) == NULL)
+            u = llist_insert(l1->data, u);
+    return u;
+}
+
+llist llist_greater(int v, llist l) {
+    llist u = llist_create();
+    for (; l != NULL; l = l->next)
+        if (l->data > v)
+            u = llist_insert(l->data, u);
+    return u;
+}
+
+llist llist_removenode(llist node, llist list) {
     if (list == NULL || node == NULL) return list;
     else if (node == list) {
         list = list->next;
@@ -94,6 +135,40 @@ llist llist_next(llist list) {
     if (list == NULL)
         return NULL;
     return list->next;
+}
+
+llist llist_sort(llist list) {
+    llist curr, cmp, sorted = llist_create();
+    sorted = llist_insert(0, sorted);
+
+    while (list != NULL) {
+        curr = list;
+        list = list->next;
+        for (cmp = sorted; cmp->next != NULL; cmp = cmp->next)
+            if (cmp->next->data > curr->data) break;
+        curr->next = cmp->next;
+        cmp->next = curr;
+    }
+    list = sorted->next;
+    free(sorted);
+    return list;
+}
+
+llist llist_reverse(llist list) {
+    llist curr, next, prev = NULL;
+    for (curr = list; curr != NULL; curr = next) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+    }
+    return prev;
+}
+
+llist llist_search(int value, llist list) {
+    while (list != NULL && list->data != value) {
+        list = list->next;
+    }
+    return list;
 }
 
 int llist_getvalue(llist node) {

@@ -1,24 +1,32 @@
-#include "lqueue.h"
-#include "llist.h"
+#include "btree.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
-    lqueue *queue = lqueue_create();
+    btree T = btree_create(34,
+        btree_create(24, 
+            btree_create(11,
+                btree_create(5,
+                    btree_create_empty(),
+                    btree_create_empty()),
+                btree_create_empty()),
+            btree_create(19,
+                btree_create_empty(),
+                btree_create_empty())
+        ),
+        btree_create(17, 
+            btree_create(7,
+                btree_create_empty(),
+                btree_create_empty()),
+            btree_create(9,
+                btree_create_empty(),
+                btree_create_empty())
+        )
+    );
 
-    lqueue_enqueue(1, queue);
-    lqueue_enqueue(2, queue);
-    lqueue_enqueue(3, queue);
-    lqueue_enqueue(4, queue);
-    int val = lqueue_dequeue(queue);
-    printf("%d\n", val);
-    val = lqueue_dequeue(queue);
-    printf("%d\n", val);
-    val = lqueue_dequeue(queue);
-    printf("%d\n", val);
-    lqueue_enqueue(5, queue);
+    printf("%d\n", btree_size(T));
+    printf("%d\n", btree_height(T));
+    printf("%d\n", btree_cost(T));
 
-    lqueue_destroy(queue);
-
-    return 0;
+    btree_destroy(T);
 }
