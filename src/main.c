@@ -1,32 +1,43 @@
-#include "btree.h"
+#include "bstree.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
-    btree T = btree_create(34,
-        btree_create(24, 
-            btree_create(11,
-                btree_create(5,
-                    btree_create_empty(),
-                    btree_create_empty()),
-                btree_create_empty()),
-            btree_create(19,
-                btree_create_empty(),
-                btree_create_empty())
-        ),
-        btree_create(17, 
-            btree_create(7,
-                btree_create_empty(),
-                btree_create_empty()),
-            btree_create(9,
-                btree_create_empty(),
-                btree_create_empty())
-        )
-    );
+    bstree T = bstree_create_empty();
+    T = bstree_insert(10, T);
+    T = bstree_insert(5, T);
+    T = bstree_insert(6, T);
+    T = bstree_insert(1, T);
+    T = bstree_insert(2, T);
+    T = bstree_insert(13, T);
+    bstree_traverse_in(T, bstree_print_root);
 
-    printf("%d\n", btree_size(T));
-    printf("%d\n", btree_height(T));
-    printf("%d\n", btree_cost(T));
+    T = bstree_sremove(6, T);
+    bstree_traverse_in(T, bstree_print_root);
 
-    btree_destroy(T);
+    T = bstree_sremove(1, T);
+    bstree_traverse_in(T, bstree_print_root);
+
+    T = bstree_sremove(2, T);
+    bstree_traverse_in(T, bstree_print_root);
+
+    T = bstree_sremove(5, T);
+    bstree_traverse_in(T, bstree_print_root);
+
+    T = bstree_remove(T);
+    bstree_traverse_in(T, bstree_print_root);
+    
+    T = bstree_sremove(1, T);
+    bstree_traverse_in(T, bstree_print_root);
+
+    T = bstree_sremove(13, T);
+    bstree_traverse_in(T, bstree_print_root);
+    
+    T = bstree_sremove(1, T);
+    bstree_traverse_in(T, bstree_print_root);
+    // printf("%d\n", btree_size(T));
+    // printf("%d\n", btree_height(T));
+    // printf("%d\n", btree_cost(T));
+
+    bstree_destroy(T);
 }
