@@ -37,13 +37,17 @@ bstree bstree_insert(int data, bstree t) {
 bstree bstree_remove(bstree node) {
     if (node != NULL) {
         bstree temp = node;
-        if (node->r == NULL)
-            node = node->l;
+        if (node->l == NULL)
+            node = node->r;
         else {
-            while (node->r != NULL) {
-                node = node->r;
+            bstree p = node;
+            temp = node->l;
+            while (temp->r != NULL) {
+                p = temp;
+                temp = temp->r;
             }
-            node->l = temp->l;
+            node->data = temp->data;
+            p->r = NULL;
         }
         free(temp);
     }
