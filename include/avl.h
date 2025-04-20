@@ -8,8 +8,6 @@ void avl_destroy(avl t);
 
 avl avl_insert(int data, avl t);
 
-avl avl_remove(avl t);
-
 avl avl_sremove(int data, avl t);
 
 void avl_traverse_pre(avl t, void (*visit)(avl));
