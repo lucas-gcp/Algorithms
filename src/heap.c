@@ -50,8 +50,8 @@ static void heap_fixup(int pos, heap h) {
 
 static void heap_fixdown(int pos, heap h) {
     int next, left = left(pos), right = right(pos);
-    while (left < h->max) {
-        if (right < h->max && h->v[right] > h->v[left])
+    while (left < h->pos) {
+        if (right < h->pos && h->v[right] > h->v[left])
             next = right;
         else
             next = left;
@@ -70,9 +70,9 @@ heap heap_build(int *v, int n) {
     int i;
     for (i = 0; i < n; i++)
         h->v[i] = v[i];
+    h->pos = n;
     for (i = n/2 - 1; i >=0; i--)
         heap_fixdown(i, h);
-    h->pos = n;
     return h;
 }
 
